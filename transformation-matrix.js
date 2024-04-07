@@ -95,3 +95,15 @@ export function scaleAll(x, y, z){
     );
     return scalingMatrix;
 }
+
+//function to translate all axis
+export function translateAll(x, y, z){
+    const translatingMatrix = new Matrix4();
+    translatingMatrix.set(
+        1, 0, 0, x,
+        0, 1, 0, y,
+        0, 0, 1, z,
+        0, 0, 0, 1
+    );
+    return translatingMatrix;
+}
