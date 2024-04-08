@@ -3,21 +3,22 @@ import {
 	rotateMatrixX, rotateMatrixY, 
 	rotateMatrixZ,scaleAll, scaleX,
 	scaleY, scaleZ, translateAll } from './transformation-matrix.js';
-import {createFloor} from './mesh/floor.js';
+import { createFloor } from './mesh/floor.js';
 import { createWalls } from './mesh/wall.js';
 import { createWindow } from './mesh/window.js';
 import { createTable} from './mesh/table.js';
+import { createChair} from './mesh/chair.js';
 
 //settin up the scene
 const scene = new THREE.Scene();
-/*const axesHelper = new THREE.AxesHelper( 7 );
-scene.add( axesHelper );*/
+const axesHelper = new THREE.AxesHelper( 7 );
+scene.add( axesHelper );
 /*const gridHelper = new THREE.GridHelper( 20, 20 );
 scene.add( gridHelper );*/
 
 //setting up the camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(12, 12, 12);
+camera.position.set(9, 9, 9);
 camera.lookAt(0,0,0);
 
 //setting up the renderer
@@ -42,6 +43,7 @@ floor.applyMatrix4(scaleAll(15,15,15));
 floor.applyMatrix4(rotateMatrixX(90));
 
 //adding the walls
+
 const firstWall = createWalls();
 firstWall.applyMatrix4(translateAll(-15, 0.5, 0));
 firstWall.applyMatrix4(scaleZ(15));
@@ -67,9 +69,24 @@ firstWindows.applyMatrix4(translateAll(-7, 4, 2 ));
 //adding the table
 const table = createTable();
 
+//adding the chair
+const firstChair = createChair();
+firstChair.applyMatrix4(rotateMatrixY(90));
+firstChair.applyMatrix4(scaleAll(0.6, 0.6, 0.6));
+firstChair.applyMatrix4(translateAll(0, 0, -2.5));
+
+const secondChair = createChair();
+secondChair.applyMatrix4(rotateMatrixY(-90));
+secondChair.applyMatrix4(scaleAll(0.6, 0.6, 0.6));
+secondChair.applyMatrix4(translateAll(0, 0, 2.5));
+
+//put all object or mesh into array
 const objectArray = [
 	floor, firstWall, secondWall,
-	firstWindows, secondWindows, table];
+	firstWindows, secondWindows, table, 
+	firstChair, secondChair];
+
+//group all object
 const room = new THREE.Group();
 for (const object of objectArray) {
 	room.add(object);
