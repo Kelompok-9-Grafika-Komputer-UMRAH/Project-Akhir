@@ -6,6 +6,7 @@ import {
 import {createFloor} from './mesh/floor.js';
 import { createWalls } from './mesh/wall.js';
 import { createWindow } from './mesh/window.js';
+import { createTable} from './mesh/table.js';
 
 //settin up the scene
 const scene = new THREE.Scene();
@@ -16,8 +17,8 @@ scene.add( gridHelper );*/
 
 //setting up the camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(-1, 3, 11);
-//camera.lookAt(0,0,0);
+camera.position.set(12, 12, 12);
+camera.lookAt(0,0,0);
 
 //setting up the renderer
 const renderer = new THREE.WebGLRenderer();
@@ -37,37 +38,38 @@ scene.add( directionalLight );
 
 //adding the floor
 const floor = createFloor();
-floor.applyMatrix4(scaleAll(10,10,10));
+floor.applyMatrix4(scaleAll(15,15,15));
 floor.applyMatrix4(rotateMatrixX(90));
 
 //adding the walls
 const firstWall = createWalls();
-firstWall.position.y = 0.5;
-firstWall.position.x = -10;
-firstWall.applyMatrix4(scaleZ(10));
+firstWall.applyMatrix4(translateAll(-15, 0.5, 0));
+firstWall.applyMatrix4(scaleZ(15));
 firstWall.applyMatrix4(scaleX(0.5));
-firstWall.applyMatrix4(scaleY(6));
+firstWall.applyMatrix4(scaleY(8));
 
 const secondWall = createWalls();
-secondWall.position.y = 0.5;
-secondWall.position.z = -10;
+secondWall.applyMatrix4(translateAll(0, 0.5, -15));
 secondWall.applyMatrix4(scaleZ(0.5));
-secondWall.applyMatrix4(scaleX(10));
-secondWall.applyMatrix4(scaleY(6));
+secondWall.applyMatrix4(scaleX(15));
+secondWall.applyMatrix4(scaleY(8));
 
 //adding the window
 const secondWindows = createWindow();
 secondWindows.applyMatrix4(scaleAll(0.5, 0.5, 0.5));
-secondWindows.applyMatrix4(translateAll(1, 2.5, -4.7));
+secondWindows.applyMatrix4(translateAll(2, 4, -7));
 
 const firstWindows = createWindow();
 firstWindows.applyMatrix4(scaleAll(0.5, 0.5, 0.5));
 firstWindows.applyMatrix4(rotateMatrixY(90));
-firstWindows.applyMatrix4(translateAll(-4.7, 2.5,1 ));
+firstWindows.applyMatrix4(translateAll(-7, 4, 2 ));
+
+//adding the table
+const table = createTable();
 
 const objectArray = [
 	floor, firstWall, secondWall,
-	firstWindows, secondWindows];
+	firstWindows, secondWindows, table];
 const room = new THREE.Group();
 for (const object of objectArray) {
 	room.add(object);
@@ -75,11 +77,10 @@ for (const object of objectArray) {
 
 scene.add(room);
 
-
 //rendering
 function animate() {
 	requestAnimationFrame( animate );
-	room.applyMatrix4(rotateMatrixY(1));
+	room.applyMatrix4(rotateMatrixY(0.5));
 	renderer.render( scene, camera );
 }
 animate();
