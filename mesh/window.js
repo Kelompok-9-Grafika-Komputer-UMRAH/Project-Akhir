@@ -105,28 +105,32 @@ export function createWindow(){
 
     const windowFrameBottom = createWindowFrame();
     windowFrameBottom.applyMatrix4(translateAll(0, 0.5, 0));
+    windowFrameBottom.applyMatrix4(scaleY(0.3));
     windows.add(windowFrameBottom);
 
     const windowFrameTop = createWindowFrame();
     windowFrameTop.applyMatrix4(rotateMatrixX(180));
-    windowFrameTop.applyMatrix4(translateAll(0, 4, 0));
+    windowFrameTop.applyMatrix4(translateAll(0, 14.5, 0));
+    windowFrameTop.applyMatrix4(scaleY(0.3));
     windows.add(windowFrameTop);
 
     const windowFrameLeft = createWindowFrame();
     windowFrameLeft.applyMatrix4(rotateMatrixZ(-90));
     windowFrameLeft.applyMatrix4(scaleY(0.45));
-    windowFrameLeft.applyMatrix4(translateAll(-4.5, 2.25, 0));
+    windowFrameLeft.applyMatrix4(scaleX(0.5));
+    windowFrameLeft.applyMatrix4(translateAll(-4.7, 2.25, 0));
     windows.add(windowFrameLeft);
 
     const windowFrameRight = createWindowFrame();
     windowFrameRight.applyMatrix4(rotateMatrixZ(90));
     windowFrameRight.applyMatrix4(scaleY(0.45));
-    windowFrameRight.applyMatrix4(translateAll(4.5, 2.25, 0));
+    windowFrameRight.applyMatrix4(scaleX(0.5));
+    windowFrameRight.applyMatrix4(translateAll(4.7, 2.25, 0));
     windows.add(windowFrameRight);
 
     //add window glass
     const windowGlass = createWindowGlass();
-    windowGlass.applyMatrix4(scaleAll(8, 3, 1));
+    windowGlass.applyMatrix4(scaleAll(9, 4, 1));
     windowGlass.applyMatrix4(translateAll(0, 2.1, 0));
     windows.add(windowGlass);
 

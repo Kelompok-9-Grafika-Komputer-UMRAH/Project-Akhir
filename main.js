@@ -8,17 +8,20 @@ import { createWalls } from './mesh/wall.js';
 import { createWindow } from './mesh/window.js';
 import { createTable} from './mesh/table.js';
 import { createChair} from './mesh/chair.js';
+import { createStool } from './mesh/stool.js';
+import { createStudyTable } from './mesh/study-table.js';
+import { createBookShelf } from './mesh/book-shelf.js';
 
 //settin up the scene
 const scene = new THREE.Scene();
-const axesHelper = new THREE.AxesHelper( 7 );
-scene.add( axesHelper );
+/*const axesHelper = new THREE.AxesHelper( 7 );
+scene.add( axesHelper );*/
 /*const gridHelper = new THREE.GridHelper( 20, 20 );
 scene.add( gridHelper );*/
 
 //setting up the camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(9, 9, 9);
+camera.position.set(10, 10, 10);
 camera.lookAt(0,0,0);
 
 //setting up the renderer
@@ -43,7 +46,6 @@ floor.applyMatrix4(scaleAll(15,15,15));
 floor.applyMatrix4(rotateMatrixX(90));
 
 //adding the walls
-
 const firstWall = createWalls();
 firstWall.applyMatrix4(translateAll(-15, 0.5, 0));
 firstWall.applyMatrix4(scaleZ(15));
@@ -59,12 +61,12 @@ secondWall.applyMatrix4(scaleY(8));
 //adding the window
 const secondWindows = createWindow();
 secondWindows.applyMatrix4(scaleAll(0.5, 0.5, 0.5));
-secondWindows.applyMatrix4(translateAll(2, 4, -7));
+secondWindows.applyMatrix4(translateAll(2, 4.5, -7.22));
 
 const firstWindows = createWindow();
 firstWindows.applyMatrix4(scaleAll(0.5, 0.5, 0.5));
 firstWindows.applyMatrix4(rotateMatrixY(90));
-firstWindows.applyMatrix4(translateAll(-7, 4, 2 ));
+firstWindows.applyMatrix4(translateAll(-7.22, 4.5, 2 ));
 
 //adding the table
 const table = createTable();
@@ -80,11 +82,31 @@ secondChair.applyMatrix4(rotateMatrixY(-90));
 secondChair.applyMatrix4(scaleAll(0.6, 0.6, 0.6));
 secondChair.applyMatrix4(translateAll(0, 0, 2.5));
 
+//adding the stools
+const firstStool = createStool();
+firstStool.applyMatrix4(translateAll(4.5, 0, 0));
+firstStool.applyMatrix4(scaleAll(0.6, 0.7, 0.6));
+
+const secondStool = createStool();
+secondStool.applyMatrix4(translateAll(-4.5, 0, 0));
+secondStool.applyMatrix4(scaleAll(0.6, 0.7, 0.6));
+
+//adding study table
+const studyTable = createStudyTable();
+studyTable.applyMatrix4(translateAll(3.8, 0, -6.4));
+studyTable.applyMatrix4(scaleAll(0.9, 0.9, 1));
+
+//adding bookshelf
+const bookShelf = createBookShelf();
+bookShelf.applyMatrix4(scaleAll(0.7, 0.7, 0.7));
+bookShelf.applyMatrix4(translateAll(-4, 0, -6.5));
+
 //put all object or mesh into array
 const objectArray = [
 	floor, firstWall, secondWall,
 	firstWindows, secondWindows, table, 
-	firstChair, secondChair];
+	firstChair, secondChair, firstStool,
+	secondStool, studyTable, bookShelf];
 
 //group all object
 const room = new THREE.Group();
