@@ -90,9 +90,11 @@ function createDrawer(){
 
         //create drawer cube
         const cube = createBox();
-        /*const loader = new TextureLoader();
-        const texture = loader.load( '' );
-        texture.colorSpace = SRGBColorSpace;*/
+        const loader = new TextureLoader();
+        const texture = loader.load( 'texture/rectangular_parquet_diff_2k.jpg' );
+        texture.colorSpace = SRGBColorSpace;
+        cube.material.color.set(null);
+        cube.material.map = texture;
         cube.applyMatrix4(scaleAll(1.2, 0.5, 0.3));
         drawer.add(cube);
 
@@ -105,7 +107,7 @@ function createDrawer(){
         const texture = loader.load( '' );
         texture.colorSpace = SRGBColorSpace;*/
         const knobMaterial = new MeshLambertMaterial({
-                color : 0xaaaadd
+                color : 0x9F643C
         });
         const drawerKnob = new Mesh(knobGeometry, knobMaterial);
         drawerKnob.applyMatrix4(scaleAll(0.13, 0.1, 0.1));
@@ -124,7 +126,7 @@ function createTableDrawerSection(){
         texture.colorSpace = SRGBColorSpace;
         cube.material.color.set(null);
         cube.material.map = texture;*/
-        cube.material.color.set(null);
+        cube.material.color.set(0x623633);
         cube.applyMatrix4(translateAll(0, 1, 0));
         cube.applyMatrix4(scaleAll(1.4, 2.025, 1));
         drawerSection.add(cube);
@@ -157,18 +159,18 @@ export function createStudyTable(){
         texture.colorSpace = SRGBColorSpace;
         cube.material.color.set(null);
         cube.material.map = texture;*/
+        tableRightSide.material.color.set(0x623633);
         tableRightSide.applyMatrix4(scaleAll(0.2, 1, 1));
         tableRightSide.applyMatrix4(translateAll(4.3, 1, 0));
         tableRightSide.applyMatrix4(scaleY(2.025));
         studyTable.add(tableRightSide);
         
         const tableSurface = createBox();
-        /*const loader = new TextureLoader();
-         const texture = loader.load( '' );
+        const loader = new TextureLoader();
+        const texture = loader.load( 'texture/rectangular_parquet_diff_2k.jpg');
         texture.colorSpace = SRGBColorSpace;
-        cube.material.color.set(null);
-        cube.material.map = texture;*/
-        tableSurface.material.color.set('red');
+        tableSurface.material.color.set(null);
+        tableSurface.material.map = texture;
         tableSurface.applyMatrix4(scaleAll(4.5, 0.05, 1));
         tableSurface.applyMatrix4(translateAll(0, 4.1, 0));
         studyTable.add(tableSurface); 

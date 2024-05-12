@@ -118,6 +118,9 @@ const indices = [
   20, 21, 22,  22, 21, 23,  // bottom
 ];
 
+const loader = new TextureLoader();
+const texture = loader.load( 'texture/laminate_floor_02_diff_2k.jpg' );
+texture.colorSpace = SRGBColorSpace;
 
 function createShelves(){
         const positions = [];
@@ -146,7 +149,7 @@ function createShelves(){
         geometry.setAttribute('uv', uvAttribute);
         geometry.setIndex(indices);
 
-        const material = new MeshLambertMaterial({color:0xffffff});
+        const material = new MeshLambertMaterial({map:texture});
         const shelf = new Mesh(geometry, material);
         return shelf;       
 }
@@ -178,7 +181,7 @@ function createSideFrame(){
         geometry.setAttribute('uv', uvAttribute);
         geometry.setIndex(indices);
 
-        const material = new MeshLambertMaterial({color:0xffffff});
+        const material = new MeshLambertMaterial({map:texture});
         const sideFrame = new Mesh(geometry, material);
         return sideFrame;          
 }
@@ -210,7 +213,7 @@ function createBackFrame(){
         geometry.setAttribute('uv', uvAttribute);
         geometry.setIndex(indices);
 
-        const material = new MeshLambertMaterial({color:'red'});
+        const material = new MeshLambertMaterial({color:0xD4BFA4});
         const backFrame = new Mesh(geometry, material);
         return backFrame;          
 }

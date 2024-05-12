@@ -12,7 +12,7 @@ import { createStool } from './mesh/stool.js';
 import { createStudyTable } from './mesh/study-table.js';
 import { createBookShelf } from './mesh/book-shelf.js';
 
-//settin up the scene
+//setting up the scene
 const scene = new THREE.Scene();
 /*const axesHelper = new THREE.AxesHelper( 7 );
 scene.add( axesHelper );*/
@@ -116,6 +116,7 @@ for (const object of objectArray) {
 
 scene.add(room);
 
+console.log(camera.projectionMatrixInverse);
 //rendering
 function animate() {
 	requestAnimationFrame( animate );

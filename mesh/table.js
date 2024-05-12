@@ -115,11 +115,11 @@ function createTableLeg(){
     geometry.setAttribute('uv', uvAttribute);
     geometry.setIndex(indices);
 
-    /*const loader = new TextureLoader();
-    const texture = loader.load( 'concrete.png' );
-    texture.colorSpace = SRGBColorSpace;*/
+    const loader = new TextureLoader();
+    const texture = loader.load( 'texture/wood_table_001_.jpg' );
+    texture.colorSpace = SRGBColorSpace;
     const material = new MeshLambertMaterial({
-        color : 0xffffff
+        map:texture
     });
 
     const mesh = new Mesh(geometry, material);
@@ -152,11 +152,11 @@ function createDesk(){
     geometry.setAttribute('uv', uvAttribute);
     geometry.setIndex(indices);
 
-    /*const loader = new TextureLoader();
-    const texture = loader.load( 'concrete.png' );
-    texture.colorSpace = SRGBColorSpace;*/
+    const loader = new TextureLoader();
+    const texture = loader.load( 'texture/wood_table_001_.jpg' );
+    texture.colorSpace = SRGBColorSpace;
     const material = new MeshLambertMaterial({
-        color : 0xffffff
+        map:texture
     });
 
     const mesh = new Mesh(geometry, material);

@@ -79,11 +79,11 @@ export function createTrapezoid(){
     geometry.setAttribute('normal', normAttribute);
     geometry.setAttribute('uv', uvAttribute);
     geometry.setIndex(indices);
-    /*const loader = new TextureLoader();
-    const texture = loader.load( 'concrete.png' );
-    texture.colorSpace = SRGBColorSpace;*/
+    const loader = new TextureLoader();
+    const texture = loader.load( 'texture/oak-veneer-1.jpg' );
+    texture.colorSpace = SRGBColorSpace;
     const material = new MeshLambertMaterial({
-        color : 0xffffff
+        map:texture
     });
 
     const trapezoid = new Mesh(geometry, material);
@@ -97,11 +97,11 @@ export function createChairLeg(){
     const radialSegments = 12;
     const geometry = new CylinderGeometry(
         radiusTop, radiusBottom, height, radialSegments );
-    /*const loader = new TextureLoader();
-    const texture = loader.load( 'concrete.png' );
-    texture.colorSpace = SRGBColorSpace;*/
+    const loader = new TextureLoader();
+    const texture = loader.load( 'texture/oak-veneer-1.jpg' );
+    texture.colorSpace = SRGBColorSpace;
     const material = new MeshLambertMaterial({
-            color : 0xffffff
+            map:texture
     });
 
     const chairLeg = new Mesh(geometry, material);

@@ -78,10 +78,10 @@ function createWindowFrame(){
     windowFrameGeometry.setAttribute('uv', uvAttribute);
     windowFrameGeometry.setIndex(indices);
     
-    /*const loader = new THREE.TextureLoader();
-    const texture = loader.load( 'concrete.png' );
-    texture.colorSpace = THREE.SRGBColorSpace;*/
-    const windowFrameMaterial = new MeshLambertMaterial({color:0xffffff});
+    const loader = new TextureLoader();
+    const texture = loader.load( 'texture/wood_table_001_.jpg' );
+    texture.colorSpace = SRGBColorSpace;
+    const windowFrameMaterial = new MeshLambertMaterial({map:texture});
     
     const windowFrame = new Mesh(windowFrameGeometry, windowFrameMaterial);
     return windowFrame;
@@ -93,7 +93,7 @@ function createWindowGlass(){
     /*const loader = new TextureLoader();
     const texture = loader.load( '' );
     texture.colorSpace = SRGBColorSpace;*/
-    const glassMaterial = new MeshLambertMaterial( {color:0xD1eac5, side: DoubleSide} );
+    const glassMaterial = new MeshLambertMaterial( {color:0x989EA1, side: DoubleSide} );
     //basic color
     //const floorMaterial = new MeshLambertMaterial({color: 0xB37B50, side: DoubleSide});
     const glass = new Mesh(glassGeometry, glassMaterial );
