@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 import { 
 	rotateMatrixX, rotateMatrixY, 
 	rotateMatrixZ,scaleAll, scaleX,
@@ -21,11 +22,12 @@ scene.add( gridHelper );*/
 
 //setting up the camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(10, 10, 10);
+camera.position.set(10, 7, 10);
 camera.lookAt(0,0,0);
 
 //setting up the renderer
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.shadowMap.enabled = true;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
@@ -33,8 +35,9 @@ document.body.appendChild(renderer.domElement);
 const light = new THREE.AmbientLight( 0xffffff, 0.6 ); 
 scene.add( light );
 
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
-directionalLight.position.y = 15;
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+directionalLight.castShadow = true;
+directionalLight.position.y = 10;
 directionalLight.position.z = -15;
 directionalLight.position.x = 15;
 directionalLight.lookAt(0, 0, 0);
@@ -42,6 +45,7 @@ scene.add( directionalLight );
 
 //adding the floor
 const floor = createFloor();
+floor.receiveShadow = true;
 floor.applyMatrix4(scaleAll(15,15,15));
 floor.applyMatrix4(rotateMatrixX(90));
 
@@ -107,20 +111,63 @@ const objectArray = [
 	firstWindows, secondWindows, table, 
 	firstChair, secondChair, firstStool,
 	secondStool, studyTable, bookShelf];
-
+//make all object receive and cast shadow, except for the floor
+for (let i = 1; i < objectArray.length; i++) {
+	objectArray[i].castShadow = true;
+	objectArray[i].receiveShadow = true;
+}
 //group all object
 const room = new THREE.Group();
 for (const object of objectArray) {
 	room.add(object);
 }
-
 scene.add(room);
 
-console.log(camera.projectionMatrixInverse);
+//interactive camera
+const controls = new PointerLockControls(camera, renderer.domElement);
+//mouse controls
+renderer.domElement.addEventListener("click", ()=>{
+	controls.lock();
+})
+
+//keyboard controls
+const keyboard ={
+	"w":false,
+	"s":false,
+	"a":false,
+	"d":false
+}
+
+window.addEventListener("keydown",(event)=>{
+	keyboard[event.key] = true;
+	console.log(keyboard[event.key]);
+})
+
+window.addEventListener("keyup", (event)=>{
+	keyboard[event.key] = false;
+	console.log(keyboard[event.key]);
+})
+
+function cameraMovement() {
+	if (keyboard["w"]) {
+		controls.moveForward(0.1);
+	}
+	if (keyboard["s"]) {
+		controls.moveForward(-0.1);
+	}
+	if (keyboard["d"]) {
+		controls.moveRight(0.1);
+	}
+	if (keyboard["a"]) {
+		controls.moveRight(-0.1);
+	}
+}
+
 //rendering
 function animate() {
 	requestAnimationFrame( animate );
-	room.applyMatrix4(rotateMatrixY(0.5));
+	cameraMovement();
+	//room.applyMatrix4(rotateMatrixY(0.5));
 	renderer.render( scene, camera );
 }
 animate();
